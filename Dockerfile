@@ -5,9 +5,10 @@ USER root
 # setup env
 ARG DEBIAN_FRONTEND=noninteractive
 
-# setup package
-RUN apt-get update -qq && apt-get upgrade -y \
-    apt-get install -y fish
+RUN apt-get update -qq && \
+    apt-get upgrade -y && \
+    apt-get install --no-install-recommends -y \
+    fish
 
 # Sudo hax
 RUN useradd -l -u 33333 -G sudo -md /home/gitpod -s /usr/bin/fish -p gitpod gitpod \
