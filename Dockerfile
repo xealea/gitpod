@@ -1,6 +1,9 @@
 # from image 
 FROM vcyzteen/cloud:builder
 
+# user
+USER root
+
 # setup env
 ARG DEBIAN_FRONTEND=noninteractive
 
