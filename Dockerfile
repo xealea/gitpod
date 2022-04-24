@@ -1,5 +1,5 @@
 # from image 
-FROM vcyzteen/cloud:builder
+FROM vcyzteen/minimal:linux
 
 # user
 USER root
