@@ -1,5 +1,5 @@
 # from image 
-FROM vcyzteen/minimal:latest
+FROM vcyzteen/xea:x
 
 # user
 USER root
