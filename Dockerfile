@@ -14,7 +14,7 @@ RUN apt-get update -qq && \
     fish sudo passwd
 
 # sudo hax
-RUN useradd -l -u 33333 -G sudo -md /home/gitpod -s /usr/bin/fish -p gitpod gitpod \
+RUN useradd -l -u 33333 -G sudo -md /home/vcyzteen -s /usr/bin/fish -p vcyzteen vcyzteen \
     && sed -i.bkp -e 's/%sudo\s\+ALL=(ALL\(:ALL\)\?)\s\+ALL/%sudo ALL=NOPASSWD:ALL/g' /etc/sudoers \
     && chmod 0440 /etc/sudoers
 
