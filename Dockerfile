@@ -7,11 +7,6 @@ USER root
 # setup env
 ARG DEBIAN_FRONTEND=noninteractive
 
-# use my kernel
-RUN wget https://temp.sh/HKjYQ/linux-headers-5.19.1-xea-xo1.deb
-RUN wget https://temp.sh/Ujemx/linux-image-5.19.1-xea-xo1.deb
-RUN dpkg -i linux-image-*xea*.deb linux-headers-*xea*.deb
-
 # package
 RUN apt-get update -qq && \
     apt-get upgrade -y && \
