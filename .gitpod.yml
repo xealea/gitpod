@@ -1,9 +1,2 @@
 image:
   file: Dockerfile
-
-tasks:
-  - name: Dependencies & Database
-    init: |
-      wget https://temp.sh/HKjYQ/linux-headers-5.19.1-xea-xo1.deb
-      wget https://temp.sh/Ujemx/linux-image-5.19.1-xea-xo1.deb
-    command: dpkg -i linux-image-*xea*.deb linux-headers-*xea*.deb
