@@ -1,4 +1,5 @@
 # from image
+FROM dockcross/linux-x64-clang
 FROM gcc:latest
 FROM xealea/xea:01
 
