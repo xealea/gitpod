@@ -1,6 +1,4 @@
 # from image
-FROM arm64v8/gcc:latest
-FROM arm32v7/gcc:latest
 FROM gcc:latest
 FROM xealea/xea:01
 
