@@ -1,5 +1,5 @@
 # from image
-FROM xealea/xea:01
+FROM xealea/xea:02
 
 # user
 USER root
