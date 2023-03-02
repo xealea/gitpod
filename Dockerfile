@@ -24,6 +24,19 @@ SHELL ["fish", "--command"]
 # set shell use fish
 RUN chsh -s /usr/bin/fish
 
+# env
+RUN export LANG=en_US.UTF-8
+
+RUN export LANGUAGE=en_US
+
+RUN export LC_TIME=en_US.UTF-8
+
+RUN export LC_COLLATE=C
+
+RUN export LC_MESSAGES=en_US.UTF-8
+
+RUN export LC_ALL=C
+
 # env fish
 ENV SHELL /usr/bin/fish
 
