@@ -4,7 +4,7 @@ FROM xealea/faster:01
 USER root
 
 # make file doas
-RUN touch /etc/doas.d/doas.conf && echo "#permit nopass gitpod as root" >> /etc/doas.d/doas.conf
+RUN mkdir /etc/doas.d && touch /etc/doas.d/doas.conf && echo "#permit nopass gitpod as root" >> /etc/doas.d/doas.conf
 
 # package
 RUN apk add --no-cache bash shadow fish doas neofetch ccache && \
