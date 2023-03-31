@@ -2,5 +2,5 @@ FROM xealea/faster:01
 
 # package
 RUN apk add --no-cache bash shadow fish doas neofetch ccache && \
-    adduser -D -u 33333 -h /home/gitpod -s /usr/bin/fish gitpod && \
+    adduser -D -u 33333 -h /home/gitpod -s /bin/fish gitpod && \
     echo "permit nopass gitpod as root" >> /etc/doas.conf
