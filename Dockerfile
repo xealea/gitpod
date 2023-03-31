@@ -1,5 +1,8 @@
 FROM xealea/faster:01
 
+# make file doas
+RUN touch /etc/doas.conf && echo "#permit nopass gitpod as root" >> /etc/doas.conf
+
 # package
 RUN apk add --no-cache bash shadow fish doas neofetch ccache && \
     useradd -l -u 33333 -G wheel -md /home/gitpod -s /bin/fish -p gitpod gitpod \
