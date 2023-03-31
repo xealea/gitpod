@@ -1,28 +1,15 @@
-# from image
-FROM xealea/toolchain:build
-
-# user
-USER root
-
-# setup env
-ARG DEBIAN_FRONTEND=noninteractive
+FROM xealea/faster:01
 
 # package
-RUN apt-get update -qq && \
-    apt-get upgrade -y && \
-    apt-get install --no-install-recommends -y \
-    fish sudo passwd neofetch ccache
-
-# sudo hax
-RUN useradd -l -u 33333 -G sudo -md /home/gitpod -s /usr/bin/fish -p gitpod gitpod \
-    && sed -i.bkp -e 's/%sudo\s\+ALL=(ALL\(:ALL\)\?)\s\+ALL/%sudo ALL=NOPASSWD:ALL/g' /etc/sudoers \
-    && chmod 0440 /etc/sudoers
+RUN apk add --no-cache fish doas neofetch ccache && \
+    adduser -D -u 33333 -h /home/gitpod -s /usr/bin/fish gitpod && \
+    echo "permit nopass gitpod as root" >> /etc/doas.conf
 
 # shell cmd
 SHELL ["fish", "--command"]
 
 # set shell use fish
-RUN chsh -s /usr/bin/fish
+RUN chsh -s /usr/bin/fish gitpod
 
 # env fish
 ENV SHELL /usr/bin/fish
