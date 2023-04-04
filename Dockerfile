@@ -1,31 +1,28 @@
 # from image
-FROM xealea/toolchain:build
+FROM xealea/faster:01
 
-# user
+# switch to root user
 USER root
 
-# setup env
-ARG DEBIAN_FRONTEND=noninteractive
+# install packages
+RUN apk update && \
+    apk upgrade && \
+    apk add --no-cache fish neofetch ccache doas && \
+    adduser -D -u 33333 gitpod && \
+    addgroup gitpod wheel && \
+    echo "gitpod ALL=(ALL) NOPASSWD: ALL" > /etc/doas.conf
 
-# package
-RUN apt-get update -qq && \
-    apt-get upgrade -y && \
-    apt-get install --no-install-recommends -y \
-    fish sudo passwd neofetch ccache
+# switch to gitpod user
+USER gitpod
 
-# sudo hax
-RUN useradd -l -u 33333 -G sudo -md /home/gitpod -s /usr/bin/fish -p gitpod gitpod \
-    && sed -i.bkp -e 's/%sudo\s\+ALL=(ALL\(:ALL\)\?)\s\+ALL/%sudo ALL=NOPASSWD:ALL/g' /etc/sudoers \
-    && chmod 0440 /etc/sudoers
-
-# shell cmd
+# set default shell to fish
 SHELL ["fish", "--command"]
 
-# set shell use fish
+# set fish as the default shell
 RUN chsh -s /usr/bin/fish
 
-# env fish
+# set SHELL environment variable
 ENV SHELL /usr/bin/fish
 
-# entrypoint
-ENTRYPOINT [ "fish" ]
+# set entrypoint
+ENTRYPOINT ["fish"]
