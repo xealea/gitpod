@@ -16,10 +16,10 @@ RUN apk update && \
 USER gitpod
 
 # set default shell to fish
-SHELL ["fish", "--command"]
+SHELL ["fish", "--version"]
 
 # set fish as the default shell
-RUN chsh -s /usr/bin/fish
+RUN chsh -s /usr/bin/fish gitpod
 
 # set SHELL environment variable
 ENV SHELL /usr/bin/fish
