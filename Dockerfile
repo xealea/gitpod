@@ -5,7 +5,8 @@ FROM archlinux:latest
 USER root
 
 # package
-RUN pacman -Syu && pacman -Sy sudo fish
+RUN pacman -Syu
+RUN pacman -Sy sudo fish
 
 # sudo hax
 RUN useradd -l -u 33333 -G sudo -md /home/gitpod -s /usr/bin/fish -p gitpod gitpod \
