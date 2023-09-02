@@ -1,17 +1,11 @@
 # from image
-FROM xealea/toolchain:build
+FROM archlinux:latest
 
 # user
 USER root
 
-# setup env
-ARG DEBIAN_FRONTEND=noninteractive
-
 # package
-RUN apt-get update -qq && \
-    apt-get upgrade -y && \
-    apt-get install --no-install-recommends -y \
-    fish sudo passwd ccache flex
+RUN pacman -Syu && pacman -Sy sudo fish
 
 # sudo hax
 RUN useradd -l -u 33333 -G sudo -md /home/gitpod -s /usr/bin/fish -p gitpod gitpod \
