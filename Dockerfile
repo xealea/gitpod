@@ -4,10 +4,6 @@ FROM archlinux:latest
 # user
 USER root
 
-# package
-RUN pacman -Syu
-RUN pacman -Sy sudo fish
-
 # sudo hax
 RUN useradd -l -u 33333 -G sudo -md /home/gitpod -s /usr/bin/fish -p gitpod gitpod \
     && sed -i.bkp -e 's/%sudo\s\+ALL=(ALL\(:ALL\)\?)\s\+ALL/%sudo ALL=NOPASSWD:ALL/g' /etc/sudoers \
