@@ -1,5 +1,5 @@
 # from image
-FROM debian:latest
+FROM silkeh/clang:latest
 
 # user
 USER root
