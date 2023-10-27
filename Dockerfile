@@ -1,31 +1,12 @@
 # from image
-FROM silkeh/clang:latest
+FROM fedora:latest
 
 # user
 USER root
 
-# setup env
-ARG DEBIAN_FRONTEND=noninteractive
+RUN useradd -l -u 33333 -G wheel -md /home/gitpod -s /bin/bash -p gitpod gitpod \
+    && sed -i.bkp -e 's/%wheel\s\+ALL=(ALL\(:ALL\)\?)\s\+ALL/%wheel ALL=NOPASSWD:ALL/g' /etc/sudoers
 
-# package
-RUN apt-get update -qq && \
-    apt-get upgrade -y && \
-    apt-get install --no-install-recommends -y \
-    fish sudo passwd ccache flex git
-
-# sudo hax
-RUN useradd -l -u 33333 -G sudo -md /home/gitpod -s /usr/bin/fish -p gitpod gitpod \
-    && sed -i.bkp -e 's/%sudo\s\+ALL=(ALL\(:ALL\)\?)\s\+ALL/%sudo ALL=NOPASSWD:ALL/g' /etc/sudoers \
-    && chmod 0440 /etc/sudoers
-
-# shell cmd
-SHELL ["fish", "--command"]
-
-# set shell use fish
-RUN chsh -s /usr/bin/fish
-
-# env fish
-ENV SHELL /usr/bin/fish
-
-# entrypoint
-ENTRYPOINT [ "fish" ]
+RUN dnf install -y dnf-plugins-core git-core \
+    && dnf clean all \
+    && rm -rf /var/cache/yum
