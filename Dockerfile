@@ -1,20 +1,11 @@
 # Use a Fedora base image
-FROM fedora:latest
+FROM ghcr.io/void-linux/void-glibc 
 
-# Install necessary packages
-RUN dnf -y update && dnf install -y dnf-plugins-core git sudo && dnf clean all
+# user
+USER root
 
-# Create the "gitpod" group with the correct GID
-RUN groupadd -g 33333 gitpod
+RUN useradd -l -u 33333 -G wheel -md /home/gitpod -s /bin/bash -p gitpod gitpod \
+    && sed -i.bkp -e 's/%wheel\s\+ALL=(ALL\(:ALL\)\?)\s\+ALL/%wheel ALL=NOPASSWD:ALL/g' /etc/sudoers
 
-# Create a non-root user and give it sudo privileges without a password
-RUN useradd -m -s /bin/bash -u 33334 -g gitpod vixel \
-    && echo "vixel ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
-
-# Set the working directory
-WORKDIR /home/vixel
-
-# Switch to the vixel user
-USER vixel
-
-# You can add more configurations or software installations here if needed
+RUN xbps-install -uy xbps \
+    && xbps-install -syu
