@@ -4,7 +4,6 @@ FROM ghcr.io/void-linux/void-glibc
 # user
 USER root
 
-
 RUN xbps-install -uy xbps \
     && xbps-install -syu \
     && xbps-install -sy sudoers
