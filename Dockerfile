@@ -1,5 +1,5 @@
 # Use a Fedora base image
-FROM voidlinux:latest
+FROM voidlinux:voidlinux
 
 # user
 USER root
