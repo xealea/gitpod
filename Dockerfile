@@ -1,14 +1,12 @@
-# Use an Alpine Linux base image
+# from image
 FROM alpine:latest
 
-# Install necessary packages and configure sudo
-RUN apk update && apk upgrade && \
-    apk add --no-cache sudo shadow && \
-    rm -rf /var/cache/apk/* && \
-    useradd -u 33333 -G wheel -m -s /bin/bash gitpod && \
-    sed -i 's/%wheel ALL=(ALL) ALL/%wheel ALL=(ALL) NOPASSWD:ALL/g' /etc/sudoers
-
-# Switch to the gitpod user
+# user
 USER root
 
-# Any additional commands for the gitpod user can be added here
+RUN useradd -l -u 33333 -G wheel -md /home/gitpod -s /bin/bash -p gitpod gitpod \
+    && sed -i.bkp -e 's/%wheel\s\+ALL=(ALL\(:ALL\)\?)\s\+ALL/%wheel ALL=NOPASSWD:ALL/g' /etc/sudoers
+
+RUN apk update && apk upgrade && \
+    apk add --no-cache sudo shadow && \
+    rm -rf /var/cache/apk/*
