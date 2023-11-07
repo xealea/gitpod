@@ -10,5 +10,6 @@ RUN apk update \
     && apk add --no-cache doas shadow bc make cmake binutils gcc clang lld lldb llvm fish git \
     rm -rf /var/cache/apk/*
     
-RUN adduser -D -u 33333 -G wheel -h /home/gitpod -s /bin/bash gitpod \
+RUN adduser -D -u 33333 gitpod \
+    && addgroup gitpod wheel \
     && echo 'permit nopass gitpod as root' > /etc/doas.conf
