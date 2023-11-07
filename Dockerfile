@@ -4,7 +4,7 @@ FROM alpine:latest
 USER root
 
 RUN apk update && apk upgrade && \
-    apk add --no-cache shadow doas fish git && \ # Add 'git' package here
+    apk add --no-cache shadow doas fish git && \
     rm -rf /var/cache/apk/*
 
 RUN adduser -D -u 33333 gitpod && \
