@@ -8,7 +8,7 @@ RUN dnf -y update && dnf install -y dnf-plugins-core git sudo && dnf clean all
 RUN groupadd -g 33333 gitpod
 
 # Create a non-root user and give it sudo privileges without a password
-RUN useradd -m -s /bin/bash -u 33333 -g gitpod vixel \
+RUN useradd -m -s /bin/bash -u 33334 -g gitpod vixel \
     && echo "vixel ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
 
 # Set the working directory
