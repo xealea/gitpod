@@ -7,7 +7,7 @@ USER root
 # Combine system updates and user setup in one RUN command
 RUN apk update && \
     apk upgrade && \
-    apk add --no-cache doas fish git && \
+    apk add --no-cache doas shadow gcc clang lld lldb llvm fish git && \
     rm -rf /var/cache/apk/* && \
     adduser -D -u 33333 gitpod && \
     addgroup gitpod wheel && \
