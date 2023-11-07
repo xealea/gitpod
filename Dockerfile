@@ -8,9 +8,7 @@ USER root
 RUN apk update \
     && apk upgrade \
     && apk add --no-cache doas shadow bc make cmake binutils gcc clang lld lldb llvm fish git \
-    && rm -rf /var/cache/apk/* \
-    && useradd -l -u 33333 -G wheel -md /home/gitpod -s /bin/bash -p gitpod gitpod \
-    echo "gitpod ALL=(ALL) NOPASSWD: ALL" > /etc/doas.conf
-
-# Switch to the gitpod user
-USER gitpod
+    rm -rf /var/cache/apk/*
+    
+RUN useradd -l -u 33333 -G wheel -md /home/gitpod -s /bin/bash -p gitpod gitpod \
+    sed -i.bkp -e 's/%wheel\s\+ALL=(ALL\(:ALL\)\?)\s\+ALL/%wheel ALL=NOPASSWD:ALL/g' /etc/doas.conf
