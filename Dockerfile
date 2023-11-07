@@ -1,10 +1,10 @@
-# from image
+# FROM image
 FROM alpine:latest
 
 USER root
 
 RUN apk update && apk upgrade && \
-    apk add --no-cache shadow doas fish && \
+    apk add --no-cache shadow doas fish git && \ # Add 'git' package here
     rm -rf /var/cache/apk/*
 
 RUN adduser -D -u 33333 gitpod && \
