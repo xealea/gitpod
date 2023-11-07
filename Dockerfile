@@ -13,3 +13,5 @@ RUN apk update \
 RUN adduser -D -u 33333 gitpod \
     && addgroup gitpod wheel \
     && echo 'permit nopass gitpod as root' > /etc/doas.conf
+
+USER gitpod
