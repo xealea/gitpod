@@ -1,15 +1,17 @@
-# from image
+# Use a Fedora base image
 FROM fedora:latest
 
-# user
-USER root
+# Install necessary packages as the root user
+RUN dnf -y update && dnf install -y dnf-plugins-core git sudo && dnf clean all
 
-RUN useradd -s /bin/bash vixel
-RUN useradd -l -u 33333 -G wheel -md /home/vixel -s /bin/bash -p vixel vixel \
-    && sed -i.bkp -e 's/%wheel\s\+ALL=(ALL\(:ALL\)\?)\s\+ALL/%wheel ALL=NOPASSWD:ALL/g' /etc/sudoers
+# Create a non-root user and give it sudo privileges without a password
+RUN useradd -m -s /bin/bash vixel \
+    && echo "vixel ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
 
-RUN dnf install -y dnf-plugins-core git-core \
-    && dnf clean all \
-    && rm -rf /var/cache/yum
-
+# Switch to the non-root user
 USER vixel
+
+# Set the working directory if needed
+WORKDIR /home/vixel
+
+# You can add more configurations or software installations here if necessary
