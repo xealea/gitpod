@@ -1,28 +1,43 @@
-# from image
-FROM xealea/faster:01
+# Use the latest Alpine image as the base image
+FROM alpine:latest
 
-# switch to root user
-USER root
+# Install necessary packages
+RUN apk add --no-cache \
+    bash \
+    sudo \
+    git \
+    openssh-client \
+    curl \
+    wget \
+    nodejs \
+    npm \
+    yarn \
+    python3 \
+    py3-pip \
+    && rm -rf /var/cache/apk/*
 
-# install packages
-RUN apk update && \
-    apk upgrade && \
-    apk add --no-cache fish neofetch ccache doas && \
-    adduser -D -u 33333 gitpod && \
-    addgroup gitpod wheel && \
-    echo "gitpod ALL=(ALL) NOPASSWD: ALL" > /etc/doas.conf
+# Set up a non-root user with sudo access
+ARG USER=gitpod
+ARG UID=1000
+ARG GID=1000
+RUN adduser -D -u $UID -g $GID $USER \
+    && echo "$USER ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers.d/$USER \
+    && chmod 0440 /etc/sudoers.d/$USER
 
-# switch to gitpod user
-USER gitpod
+# Set environment variables
+ENV HOME /home/$USER
+ENV SHELL /bin/bash
 
-# set default shell to fish
-SHELL ["fish", "--version"]
+# Switch to the non-root user
+USER $USER
 
-# set fish as the default shell
-RUN chsh -s /usr/bin/fish gitpod
+# Set the working directory
+WORKDIR $HOME
 
-# set SHELL environment variable
-ENV SHELL /usr/bin/fish
+# Expose the needed ports (if any)
+# EXPOSE <port>
 
-# set entrypoint
-ENTRYPOINT ["fish"]
+# Optional: You can add your custom configurations and installations here
+
+# Start a default command (if any)
+# CMD ["bash"]
