@@ -3,7 +3,7 @@ FROM alpine:latest
 
 # Set up a non-root user with sudo access
 ARG USER=gitpod
-ARG UID=1000
+ARG UID=33333
 ARG GID=33333
 
 # Ensure the group with the correct GID exists
