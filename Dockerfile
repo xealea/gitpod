@@ -12,7 +12,7 @@ RUN addgroup -g $GID $USER
 # Create the user with the specified UID and GID
 RUN adduser -D -u $UID -G $USER -g $USER $USER
 
-# Install necessary packages
+# Install necessary packages, including sudo
 RUN apk add --no-cache \
     bash \
     sudo \
