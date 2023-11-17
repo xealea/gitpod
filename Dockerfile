@@ -12,8 +12,14 @@ RUN useradd -u 33333 -m -s /usr/bin/fish gitpod && \
     usermod -aG wheel gitpod && \
     echo 'gitpod ALL=(ALL) NOPASSWD: ALL' > /etc/sudoers.d/gitpod
 
-# Set Fish as the default shell for the gitpod user
+# shell cmd
+SHELL ["fish", "--command"]
+
+# set shell use fish
 RUN chsh -s /usr/bin/fish
 
-# Set the entry point to start the shell
-ENTRYPOINT [ "/usr/bin/fish" ]
+# env fish
+ENV SHELL /usr/bin/fish
+
+# entrypoint
+ENTRYPOINT [ "fish" ]
