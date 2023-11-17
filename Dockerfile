@@ -1,6 +1,17 @@
 # Use the latest Alpine image as the base image
 FROM alpine:latest
 
+# Set up a non-root user with sudo access
+ARG USER=gitpod
+ARG UID=1000
+ARG GID=33333
+
+# Ensure the group with the correct GID exists
+RUN addgroup -g $GID $USER
+
+# Create the user with the specified UID and GID
+RUN adduser -D -u $UID -G $USER -g $USER $USER
+
 # Install necessary packages
 RUN apk add --no-cache \
     bash \
@@ -15,14 +26,6 @@ RUN apk add --no-cache \
     python3 \
     py3-pip \
     && rm -rf /var/cache/apk/*
-
-# Set up a non-root user with sudo access
-ARG USER=gitpod
-ARG UID=1000
-ARG GID=1000
-RUN adduser -D -u $UID -g $GID $USER \
-    && echo "$USER ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers.d/$USER \
-    && chmod 0440 /etc/sudoers.d/$USER
 
 # Set environment variables
 ENV HOME /home/$USER
