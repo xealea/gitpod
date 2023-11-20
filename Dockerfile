@@ -6,7 +6,7 @@ USER root
 
 # Combine system updates, installation, and user setup in one RUN command
 RUN xbps-install -Syu && \
-    xbps-install -y sudo base-devel clang lldb llvm fish git binutils ncurses libelf openssl perl rsync tar xz zstd
+    xbps-install -y sudo base-devel clang lldb llvm fish-shell git binutils ncurses libelf openssl perl rsync zip unzip lz4 tar xz zstd
     
 RUN useradd -u 33333 -m -s /usr/bin/fish gitpod && \
     usermod -aG wheel gitpod && \
