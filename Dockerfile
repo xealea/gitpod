@@ -1,5 +1,5 @@
 # Use the Void Linux base image
-FROM ghcr.io/void-linux/void-glibc-full:latest
+FROM ghcr.io/void-linux/void-glibc
 
 # Switch to root user for system updates
 USER root
