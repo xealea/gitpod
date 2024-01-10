@@ -7,13 +7,13 @@ USER root
 # Combine system updates, installation, and user setup in one RUN command
 RUN xbps-install -Syu
 
-RUN useradd -u 33333 -m -s /usr/bin/fish gitpod && \
+RUN useradd -u 33333 -m -s /bin/bash gitpod && \
     usermod -aG wheel gitpod && \
     echo 'gitpod ALL=(ALL) NOPASSWD: ALL' > /etc/sudoers.d/gitpod
 
-RUN echo 'permit nopass gitpod as root' > /etc/doas.conf && \
-    useradd -u 33333 -m -s /usr/bin/fish gitpod && \
-    usermod -aG wheel gitpod
+RUN useradd -u 33333 -m -s /usr/bin/fish gitpod && \
+    usermod -aG wheel gitpod && \
+    echo 'gitpod ALL=(ALL) NOPASSWD: ALL' > /etc/sudoers.d/gitpod
 
 # shell cmd
 SHELL ["fish", "--command"]
