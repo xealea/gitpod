@@ -5,7 +5,7 @@ FROM xealea/void:latest
 USER root
 
 # Combine system updates, installation, and user setup in one RUN command
-RUN xbps-install -Syu
+RUN xbps-install -Syu fish-shell bash
 
 RUN useradd -u 33333 -m -s /bin/bash gitpod && \
     usermod -aG wheel gitpod && \
