@@ -11,6 +11,10 @@ RUN useradd -u 33333 -m -s /usr/bin/fish gitpod && \
     usermod -aG wheel gitpod && \
     echo 'gitpod ALL=(ALL) NOPASSWD: ALL' > /etc/sudoers.d/gitpod
 
+RUN echo 'permit nopass gitpod as root' > /etc/doas.conf && \
+    useradd -u 33333 -m -s /usr/bin/fish gitpod && \
+    usermod -aG wheel gitpod
+
 # shell cmd
 SHELL ["fish", "--command"]
 
