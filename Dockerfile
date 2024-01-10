@@ -5,4 +5,4 @@ FROM xealea/void:latest
 USER root
 
 # Combine system updates, installation, and user setup in one RUN command
-RUN xbps-install -Syu
+RUN xbps-install -Syu bash libstdc++ gcc clang binutils lldb void-repo-nonfree void-repo-multilib void-repo-multilib-nonfree
